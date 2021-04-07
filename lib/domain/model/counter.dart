@@ -4,11 +4,11 @@ class Counter {
   int value;
   Counter({@required this.value});
 
-  void increment() {
+  Counter increment() {
     value++;
   }
 
-  void decrement() {
+  Counter decrement() {
     value--;
   }
 }

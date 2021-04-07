@@ -28,25 +28,41 @@ class _MyHomePageState extends State<HomePage> {
               'You have pushed the button this many times:',
             ),
             BlocBuilder<CounterBloc, CounterStates>(builder: (context, state) {
-              if (state is StateCounted) {
-                return Text(
-                  '$state.counter.value',
-                  style: Theme.of(context).textTheme.headline4,
-                );
+              if (state is StateInit) {
+                return Text("Go ahead, tap someone!");
               }
 
               if (state is StateCounting) {
                 return CircularProgressIndicator();
               }
+
+              if (state is StateCounted) {
+                return Text(
+                  state.counter.value.toString(),
+                  style: Theme.of(context).textTheme.headline4,
+                );
+              }
             }),
+            Center(
+              child: Row(
+                children: [
+                  FloatingActionButton(
+                    onPressed: () => BlocProvider.of<CounterBloc>(context)
+                        .add(EventIncrement()),
+                    tooltip: 'Increment',
+                    child: Icon(Icons.add),
+                  ),
+                  FloatingActionButton(
+                    onPressed: () => BlocProvider.of<CounterBloc>(context)
+                        .add(EventDecrement()),
+                    tooltip: 'Decrement',
+                    child: Icon(Icons.remove),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            BlocProvider.of<CounterBloc>(context).add(EventIncrement()),
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
