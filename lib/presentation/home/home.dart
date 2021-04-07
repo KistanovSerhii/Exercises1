@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_application_3/domain/bloc/counter_bloc.dart';
+import 'package:flutter_application_3/domain/bloc/counter_state.dart';
+import 'package:flutter_application_3/domain/bloc/counter_event.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -10,14 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,15 +27,24 @@ class _MyHomePageState extends State<HomePage> {
             Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            BlocBuilder<CounterBloc, CounterStates>(builder: (context, state) {
+              if (state is StateCounted) {
+                return Text(
+                  '$state.counter.value',
+                  style: Theme.of(context).textTheme.headline4,
+                );
+              }
+
+              if (state is StateCounting) {
+                return CircularProgressIndicator();
+              }
+            }),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () =>
+            BlocProvider.of<CounterBloc>(context).add(EventIncrement()),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
