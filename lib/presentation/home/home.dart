@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_application_3/domain/bloc/counter_bloc.dart';
-import 'package:flutter_application_3/domain/bloc/counter_state.dart';
-import 'package:flutter_application_3/domain/bloc/counter_event.dart';
+import 'package:flutter_application_3/domain/bloc/counter/counter_bloc.dart';
+import 'package:flutter_application_3/domain/bloc/counter/counter_state.dart';
+import 'package:flutter_application_3/domain/bloc/counter/counter_event.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -27,16 +27,16 @@ class _MyHomePageState extends State<HomePage> {
             Text(
               'You have pushed the button this many times:',
             ),
-            BlocBuilder<CounterBloc, CounterStates>(builder: (context, state) {
-              if (state is StateInit) {
+            BlocBuilder<CounterBloc, CounterState>(builder: (context, state) {
+              if (state is CounterInitialize) {
                 return Text("Go ahead, tap someone!");
               }
 
-              if (state is StateCounting) {
+              if (state is CounterCounting) {
                 return CircularProgressIndicator();
               }
 
-              if (state is StateCounted) {
+              if (state is CounterCounted) {
                 return Text(
                   state.counter.value.toString(),
                   style: Theme.of(context).textTheme.headline4,

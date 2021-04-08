@@ -5,10 +5,10 @@ class Counter {
   Counter({@required this.value});
 
   void increment() {
-    value++;
+    this.value++;
   }
 
   void decrement() {
-    value--;
+    this.value--;
   }
 }
