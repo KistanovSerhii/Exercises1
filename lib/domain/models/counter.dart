@@ -6,20 +6,27 @@ class Counter {
   int value;
   Counter({@required this.value});
 
-  Future<void> increment() {
+  CounterCounted increment() {
     this.value++;
+    return CounterCounted(counter: this);
   }
 
-  Future<CounterCounted> decrement() async {
-    int randomNum = await TestApiUtil.decrement();
+  CounterCounted decrement() {
+    this.value++;
+    return CounterCounted(counter: this);
+  }
+
+  Future<CounterCounted> decrementCloudyComputition() async {
+    int randomNum = await TestApiUtil.decrementCloudyComputition();
     this.value = randomNum;
-    return CounterCounted(counter: Counter(value: this.value));
+    return CounterCounted(counter: this);
   }
 }
 
 // fake api
 class TestApiUtil {
-  static Future<int> decrement() => Future.delayed(Duration(seconds: 2), () {
+  static Future<int> decrementCloudyComputition() =>
+      Future.delayed(Duration(seconds: 2), () {
         var rng = new Random();
         return rng.nextInt(100);
       });

@@ -15,12 +15,15 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
     switch (event.runtimeType) {
       case EventIncrement:
         yield CounterCounting();
-        await counter.increment();
-        yield CounterCounted(counter: counter);
+        yield counter.increment();
         break;
       case EventDecrement:
         yield CounterCounting();
-        yield await counter.decrement();
+        if (counter.value % 2 == 0) {
+          yield await counter.decrementCloudyComputition();
+        } else {
+          yield counter.decrement();
+        }
         break;
       default:
     }
