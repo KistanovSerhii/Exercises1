@@ -15,19 +15,12 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
     switch (event.runtimeType) {
       case EventIncrement:
         yield CounterCounting();
-        counter.increment();
+        await counter.increment();
         yield CounterCounted(counter: counter);
         break;
       case EventDecrement:
-        () async {
-          /*
-          status = CounterStatus.counting;
-          final data = await CounterRepositoryModule.getCloudComputing(
-          countStep: countStep, currentValue: counter.value);
-          counter.copyWith(data);
-          status = CounterStatus.counted;
-          */
-        };
+        yield CounterCounting();
+        yield await counter.decrement();
         break;
       default:
     }
