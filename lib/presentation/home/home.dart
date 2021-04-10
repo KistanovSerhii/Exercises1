@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_application_3/domain/bloc/counter/counter_bloc.dart';
-import 'package:flutter_application_3/domain/bloc/counter/counter_state.dart';
-import 'package:flutter_application_3/domain/bloc/counter/counter_event.dart';
+import 'package:flutter_application_3/internal/dependences/lib_references/counter_references.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -42,6 +40,7 @@ class _MyHomePageState extends State<HomePage> {
                   style: Theme.of(context).textTheme.headline4,
                 );
               }
+              return Container();
             }),
             Center(
               child: Row(

@@ -1,6 +1,4 @@
-import 'dart:math';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_3/domain/bloc/counter/counter_state.dart';
+part of 'package:flutter_application_3/internal/dependences/lib_references/counter_references.dart';
 
 class Counter {
   int value;

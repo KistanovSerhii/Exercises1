@@ -1,14 +1,10 @@
-import 'dart:developer';
-
-import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'counter_event.dart';
-import 'counter_state.dart';
-import 'package:flutter_application_3/domain/models/counter.dart';
+part of 'package:flutter_application_3/internal/dependences/lib_references/counter_references.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
   final Counter counter;
-  CounterBloc({@required this.counter}) : super(CounterInitialize());
+  CounterBloc({@required this.counter})
+      // ВАЖНО задать первоначальное состояние
+      : super(CounterInitialize(counter: counter));
 
   @override
   Stream<CounterState> mapEventToState(CounterEvent event) async* {
@@ -16,6 +12,7 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
       case EventIncrement:
         yield CounterCounting();
         yield counter.increment();
+        //state.getRef(); // Получилось!
         break;
       case EventDecrement:
         yield CounterCounting();

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_3/domain/models/counter.dart';
+import 'package:flutter_application_3/internal/dependences/lib_references/counter_references.dart';
 import 'package:flutter_application_3/data/services/services.dart';
 
 class CloudComputingApi {
