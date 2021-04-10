@@ -1,36 +1,14 @@
 part of 'package:flutter_application_3/internal/dependences/lib_references/counter_references.dart';
 
-@immutable
-abstract class CounterState {
-  CounterState getRef();
-//abstract class CounterState extends Equatable {
-  /*@override
-  List<Object> get props => [];*/
-}
+enum CounterStatus { init, counting, counted, error }
 
 @immutable
-class CounterInitialize extends CounterState {
+class CounterState extends Equatable {
+  final CounterStatus status;
   final Counter counter;
-  CounterInitialize({@required this.counter});
 
-  CounterState getRef() {
-    return this;
-  }
-}
+  CounterState({@required this.status, @required this.counter});
 
-@immutable
-class CounterCounting extends CounterState {
-  CounterState getRef() {
-    return this;
-  }
-}
-
-@immutable
-class CounterCounted extends CounterState {
-  final Counter counter;
-  CounterCounted({@required this.counter});
-
-  CounterState getRef() {
-    return this;
-  }
+  @override
+  List<Object> get props => [status, counter.value];
 }

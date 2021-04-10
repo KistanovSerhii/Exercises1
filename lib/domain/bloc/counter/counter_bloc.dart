@@ -1,28 +1,30 @@
 part of 'package:flutter_application_3/internal/dependences/lib_references/counter_references.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  final Counter counter;
-  CounterBloc({@required this.counter})
+  CounterBloc()
       // ВАЖНО задать первоначальное состояние
-      : super(CounterInitialize(counter: counter));
-
+      : super(CounterState(
+            status: CounterStatus.init, counter: Counter(value: 0)));
   @override
   Stream<CounterState> mapEventToState(CounterEvent event) async* {
     switch (event.runtimeType) {
       case EventIncrement:
-        yield CounterCounting();
-        yield counter.increment();
-        //state.getRef(); // Получилось!
+        yield counterStateCounting();
+        yield state.counter.increment();
         break;
       case EventDecrement:
-        yield CounterCounting();
-        if (counter.value % 2 == 0) {
-          yield await counter.decrementCloudyComputition();
+        if (state.counter.value % 2 == 0) {
+          yield counterStateCounting();
+          yield await state.counter.decrementCloudyComputition();
         } else {
-          yield counter.decrement();
+          yield counterStateCounting();
+          yield state.counter.decrement();
         }
         break;
       default:
     }
   }
+
+  CounterState counterStateCounting() =>
+      CounterState(status: CounterStatus.counting, counter: state.counter);
 }

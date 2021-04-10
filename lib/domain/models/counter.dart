@@ -4,20 +4,20 @@ class Counter {
   int value;
   Counter({@required this.value});
 
-  CounterCounted increment() {
+  CounterState increment() {
     this.value++;
-    return CounterCounted(counter: this);
+    return CounterState(status: CounterStatus.counted, counter: this);
   }
 
-  CounterCounted decrement() {
-    this.value++;
-    return CounterCounted(counter: this);
+  CounterState decrement() {
+    this.value++; // !!!!!!!!!!!!!!!!!!!!
+    return CounterState(status: CounterStatus.counted, counter: this);
   }
 
-  Future<CounterCounted> decrementCloudyComputition() async {
+  Future<CounterState> decrementCloudyComputition() async {
     int randomNum = await TestApiUtil.decrementCloudyComputition();
     this.value = randomNum;
-    return CounterCounted(counter: this);
+    return CounterState(status: CounterStatus.counted, counter: this);
   }
 }
 

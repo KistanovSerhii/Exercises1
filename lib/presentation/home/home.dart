@@ -26,15 +26,15 @@ class _MyHomePageState extends State<HomePage> {
               'You have pushed the button this many times:',
             ),
             BlocBuilder<CounterBloc, CounterState>(builder: (context, state) {
-              if (state is CounterInitialize) {
+              if (state.status == CounterStatus.init) {
                 return Text("Go ahead, tap someone!");
               }
 
-              if (state is CounterCounting) {
+              if (state.status == CounterStatus.counting) {
                 return CircularProgressIndicator();
               }
 
-              if (state is CounterCounted) {
+              if (state.status == CounterStatus.counted) {
                 return Text(
                   state.counter.value.toString(),
                   style: Theme.of(context).textTheme.headline4,

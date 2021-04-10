@@ -5,7 +5,7 @@ import 'package:flutter_application_3/presentation/home/home.dart';
 
 class MyApp extends StatelessWidget {
   final CounterBloc _counterBloc = // ВАЖНО задать первоначальное состояние
-      CounterBloc(counter: Counter(value: 0));
+      CounterBloc();
 
   @override
   Widget build(BuildContext context) {
