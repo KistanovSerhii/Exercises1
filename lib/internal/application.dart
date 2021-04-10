@@ -10,13 +10,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter bloC pattern',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
         create: (context) => _counterBloc,
-        child: HomePage(title: 'Flutter Demo Home Page'),
+        child: HomePage(title: 'Flutter bloC pattern counter'),
       ),
     );
   }

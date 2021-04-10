@@ -27,21 +27,22 @@ class _MyHomePageState extends State<HomePage> {
             ),
             BlocBuilder<CounterBloc, CounterState>(builder: (context, state) {
               if (state.status == CounterStatus.init) {
-                return Text("Go ahead, tap someone!");
+                return Center(child: Text("Go ahead, tap someone!"));
               }
 
               if (state.status == CounterStatus.counting) {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
 
               if (state.status == CounterStatus.counted) {
                 return Text(
                   state.counter.value.toString(),
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headline1,
                 );
               }
               return Container();
             }),
+            Spacer(),
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,17 +53,19 @@ class _MyHomePageState extends State<HomePage> {
                     tooltip: 'Increment',
                     child: Icon(Icons.add),
                   ),
-                  FloatingActionButton(
-                    onPressed: () => BlocProvider.of<CounterBloc>(context)
-                        .add(EventDecrement()),
-                    tooltip: 'Decrement',
-                    child: Icon(Icons.remove),
-                  ),
+                  Spacer(),
                   FloatingActionButton(
                     onPressed: () => BlocProvider.of<CounterBloc>(context)
                         .add(EventRandomFromCloud()),
                     tooltip: 'Random',
                     child: Icon(Icons.cloud),
+                  ),
+                  Spacer(),
+                  FloatingActionButton(
+                    onPressed: () => BlocProvider.of<CounterBloc>(context)
+                        .add(EventDecrement()),
+                    tooltip: 'Decrement',
+                    child: Icon(Icons.remove),
                   ),
                 ],
               ),
