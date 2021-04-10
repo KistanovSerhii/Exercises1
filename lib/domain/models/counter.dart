@@ -4,18 +4,22 @@ class Counter {
   int value;
   Counter({@required this.value});
 
+  CounterState counting() {
+    return CounterState(status: CounterStatus.counting, counter: this);
+  }
+
   CounterState increment() {
     this.value++;
     return CounterState(status: CounterStatus.counted, counter: this);
   }
 
   CounterState decrement() {
-    this.value++; // !!!!!!!!!!!!!!!!!!!!
+    this.value--;
     return CounterState(status: CounterStatus.counted, counter: this);
   }
 
-  Future<CounterState> decrementCloudyComputition() async {
-    int randomNum = await TestApiUtil.decrementCloudyComputition();
+  Future<CounterState> getRandomFromCloudy() async {
+    int randomNum = await TestApiUtil.getRandomFromCloudy();
     this.value = randomNum;
     return CounterState(status: CounterStatus.counted, counter: this);
   }
@@ -23,8 +27,8 @@ class Counter {
 
 // fake api
 class TestApiUtil {
-  static Future<int> decrementCloudyComputition() =>
-      Future.delayed(Duration(seconds: 2), () {
+  static Future<int> getRandomFromCloudy() =>
+      Future.delayed(Duration(seconds: 1), () {
         var rng = new Random();
         return rng.nextInt(100);
       });

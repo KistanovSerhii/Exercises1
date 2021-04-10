@@ -11,4 +11,19 @@ class CounterState extends Equatable {
 
   @override
   List<Object> get props => [status, counter.value];
+
+  Stream<CounterState> increment() async* {
+    yield counter.counting();
+    yield counter.increment();
+  }
+
+  Stream<CounterState> decrement() async* {
+    yield counter.counting();
+    yield counter.decrement();
+  }
+
+  Stream<CounterState> getRandomFromCloudy() async* {
+    yield counter.counting();
+    yield await counter.getRandomFromCloudy();
+  }
 }

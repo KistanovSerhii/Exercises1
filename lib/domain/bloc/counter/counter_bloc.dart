@@ -9,22 +9,14 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   Stream<CounterState> mapEventToState(CounterEvent event) async* {
     switch (event.runtimeType) {
       case EventIncrement:
-        yield counterStateCounting();
-        yield state.counter.increment();
+        yield* state.increment();
         break;
       case EventDecrement:
-        if (state.counter.value % 2 == 0) {
-          yield counterStateCounting();
-          yield await state.counter.decrementCloudyComputition();
-        } else {
-          yield counterStateCounting();
-          yield state.counter.decrement();
-        }
+        yield* state.decrement();
+        break;
+      case EventRandomFromCloud:
+        yield* state.getRandomFromCloudy();
         break;
       default:
     }
   }
-
-  CounterState counterStateCounting() =>
-      CounterState(status: CounterStatus.counting, counter: state.counter);
-}

@@ -44,6 +44,7 @@ class _MyHomePageState extends State<HomePage> {
             }),
             Center(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FloatingActionButton(
                     onPressed: () => BlocProvider.of<CounterBloc>(context)
@@ -56,6 +57,12 @@ class _MyHomePageState extends State<HomePage> {
                         .add(EventDecrement()),
                     tooltip: 'Decrement',
                     child: Icon(Icons.remove),
+                  ),
+                  FloatingActionButton(
+                    onPressed: () => BlocProvider.of<CounterBloc>(context)
+                        .add(EventRandomFromCloud()),
+                    tooltip: 'Random',
+                    child: Icon(Icons.cloud),
                   ),
                 ],
               ),
