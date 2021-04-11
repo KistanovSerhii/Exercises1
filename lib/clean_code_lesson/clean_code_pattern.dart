@@ -81,8 +81,9 @@ class Day {
 }
 
 class SunriseService {
-  static const _BASE_URL = 'https://api.sunrise-sunset.org';
 /*
+  static const _BASE_URL = 'https://api.sunrise-sunset.org';
+
   final Dio _dio = Dio(
     BaseOptions(baseUrl: _BASE_URL),
   );

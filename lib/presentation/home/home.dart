@@ -58,8 +58,15 @@ class _MyHomePageState extends State<HomePage> {
                   Spacer(),
                   FloatingActionButton(
                     onPressed: () => BlocProvider.of<CounterBloc>(context)
-                        .add(EventRandomFromCloud()),
-                    tooltip: 'Random',
+                        .add(EventRandomNumWithDelay()),
+                    tooltip: 'Refresh',
+                    child: Icon(Icons.refresh),
+                  ),
+                  Spacer(),
+                  FloatingActionButton(
+                    onPressed: () => BlocProvider.of<CounterBloc>(context)
+                        .add(EventRandomFromHttpRequest(range: 1)),
+                    tooltip: 'RandomHttp',
                     child: Icon(Icons.cloud),
                   ),
                   Spacer(),

@@ -26,8 +26,13 @@ class CounterState extends Equatable {
     yield counter.decrement();
   }
 
+  Stream<CounterState> getRandomFromHttpRequest(int range) async* {
+    yield counter.counting();
+    yield await counter.getRandomFromHttpRequest(range);
+  }
+
   Stream<CounterState> getRandomFromCloudy() async* {
     yield counter.counting();
-    yield await counter.getRandomFromCloudy();
+    yield await counter.getRandomNumWithDelay();
   }
 }

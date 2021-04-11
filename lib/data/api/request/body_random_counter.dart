@@ -7,8 +7,8 @@ class RequestBodyRandomCounter {
 
   Map<String, dynamic> toApi() {
     return {
-      'randomRange': range,
-      'formatted': 0,
+      'length': 1, //range,
+      'uint': 8,
     };
   }
 }

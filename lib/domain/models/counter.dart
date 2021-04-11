@@ -28,16 +28,21 @@ class Counter extends CounterModule {
     return CounterState(status: CounterStatus.counted, counter: this);
   }
 
-  Future<CounterState> getRandomFromCloudy() async {
-    int randomNum = await TestApiUtil.getRandomFromCloudy();
-    this.value = randomNum;
+  Future<CounterState> getRandomFromHttpRequest(int range) async {
+    Counter respond =
+        await CounterModule.repository.getRandomCounter(range: range);
+    return CounterState(status: CounterStatus.counted, counter: respond);
+  }
+
+  Future<CounterState> getRandomNumWithDelay() async {
+    this.value = await RandomNumWithDelay.getRandomNumWithDelay();
     return CounterState(status: CounterStatus.counted, counter: this);
   }
 }
 
-// fake computing delay
-class TestApiUtil {
-  static Future<int> getRandomFromCloudy() =>
+// test fake computing delay
+class RandomNumWithDelay {
+  static Future<int> getRandomNumWithDelay() =>
       Future.delayed(Duration(seconds: 1), () {
         var rng = new Random();
         return rng.nextInt(100);

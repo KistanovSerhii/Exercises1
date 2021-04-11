@@ -17,8 +17,11 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
       case EventDecrement:
         yield* state.decrement();
         break;
-      case EventRandomFromCloud:
+      case EventRandomNumWithDelay:
         yield* state.getRandomFromCloudy();
+        break;
+      case EventRandomFromHttpRequest:
+        yield* state.getRandomFromHttpRequest(1 /*event.range*/);
         break;
       default:
     }
