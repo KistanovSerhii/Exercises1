@@ -1,19 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_3/common_path/counter.dart';
-import 'package:flutter_application_3/common_path/counter_repository.dart';
+import 'package:flutter_application_3/data/mappers/counter_mapper.dart';
+import 'package:flutter_application_3/domain/models/counter.dart';
+import 'package:flutter_application_3/data/api/services/spaceweb_service.dart';
+import 'package:flutter_application_3/data/api/request/body_random_counter.dart';
 
-import 'package:flutter_application_3/data/api/services/services.dart';
-
-abstract class ApiUtil {}
-
-class CounterApiUtil extends ApiUtil {
+class CounterApiUtil {
   final SpacewebService spacewebService;
 
   CounterApiUtil(this.spacewebService);
 
   Future<Counter> getRandomCounter({@required int range}) async {
-    final body = GetCounterBody(range: range);
-    final result = await spacewebService.getRandomCounter(body);
-    return CounterMapper.fromApi(result);
+    final body = RequestBodyRandomCounter(range: range);
+    final resultFiltered = await spacewebService.getRandomCounter(body);
+    return CounterMapper.fromApi(resultFiltered);
   }
 }

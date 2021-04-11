@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_application_3/common_path/counter.dart';
+import 'package:flutter_application_3/domain/bloc/counter/counter_bloc.dart';
 import 'package:flutter_application_3/presentation/home/home.dart';
 
 class MyApp extends StatelessWidget {
-  final CounterBloc _counterBloc = // ВАЖНО задать первоначальное состояние
-      CounterBloc();
+  final CounterBloc _counterBloc = CounterBloc();
 
   @override
   Widget build(BuildContext context) {

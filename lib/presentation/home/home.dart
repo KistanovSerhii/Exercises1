@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_application_3/common_path/counter.dart';
+import 'package:flutter_application_3/domain/bloc/counter/counter_bloc.dart';
+import 'package:flutter_application_3/domain/bloc/counter/counter_state.dart';
+import 'package:flutter_application_3/domain/bloc/counter/counter_event.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);

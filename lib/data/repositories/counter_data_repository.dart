@@ -1,7 +1,10 @@
-part of 'package:flutter_application_3/common_path/counter_repository.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_3/domain/repositories_contract/counter_repository.dart';
+import 'package:flutter_application_3/data/api/api_util.dart';
+import 'package:flutter_application_3/domain/models/counter.dart';
 
 class CounterDataRepository extends CounterRepository {
-  final ApiUtil apiUtil;
+  final CounterApiUtil apiUtil;
 
   CounterDataRepository({@required this.apiUtil});
 

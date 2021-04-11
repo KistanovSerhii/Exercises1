@@ -1,6 +1,16 @@
-part of 'package:flutter_application_3/common_path/counter.dart';
+import 'dart:math';
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_3/domain/bloc/counter/counter_state.dart';
+import 'package:flutter_application_3/domain/repositories_contract/counter_repository.dart';
+import 'package:flutter_application_3/internal/dependences_init_tools/repository_module.dart';
 
-class Counter {
+class CounterModule {
+  static final CounterRepository repository =
+      RepositoryModule.counterRepository();
+}
+
+class Counter extends CounterModule {
   int value;
   Counter({@required this.value});
 
@@ -25,7 +35,7 @@ class Counter {
   }
 }
 
-// fake api
+// fake computing delay
 class TestApiUtil {
   static Future<int> getRandomFromCloudy() =>
       Future.delayed(Duration(seconds: 1), () {

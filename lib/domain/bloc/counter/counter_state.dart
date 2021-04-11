@@ -1,4 +1,8 @@
-part of 'package:flutter_application_3/common_path/counter.dart';
+//part of 'package:flutter_application_3/common_path/counter.dart';
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_application_3/domain/models/counter.dart';
 
 enum CounterStatus { init, counting, counted, error }
 
