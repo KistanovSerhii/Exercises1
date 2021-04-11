@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_application_3/internal/dependences/lib_references/counter_references.dart';
+import 'package:flutter_application_3/common_path/counter.dart';
 import 'package:flutter_application_3/presentation/home/home.dart';
 
 class MyApp extends StatelessWidget {

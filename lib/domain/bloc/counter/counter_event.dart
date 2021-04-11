@@ -1,4 +1,4 @@
-part of 'package:flutter_application_3/internal/dependences/lib_references/counter_references.dart';
+part of 'package:flutter_application_3/common_path/counter.dart';
 
 abstract class CounterEvent {}
 
