@@ -29,9 +29,13 @@ class Counter extends CounterModule {
   }
 
   Future<CounterState> getRandomFromHttpRequest(int range) async {
-    Counter respond =
-        await CounterModule.repository.getRandomCounter(range: range);
-    return CounterState(status: CounterStatus.counted, counter: respond);
+    try {
+      Counter respond =
+          await CounterModule.repository.getRandomCounter(range: range);
+      return CounterState(status: CounterStatus.counted, counter: respond);
+    } catch (e) {
+      return CounterState(status: CounterStatus.error, counter: this);
+    }
   }
 
   Future<CounterState> getRandomNumWithDelay() async {
