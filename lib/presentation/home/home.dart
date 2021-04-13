@@ -27,18 +27,18 @@ class _MyHomePageState extends State<HomePage> {
             Text(
               'You have pushed the button this many times:',
             ),
-            BlocBuilder<CounterBloc, CounterState>(builder: (context, state) {
-              if (state.status == CounterStatus.init) {
+            BlocBuilder<CounterBloc, CounterStates>(builder: (context, state) {
+              if (state.runtimeType == InitCounterState) {
                 return Center(child: Text("Go ahead, tap someone!"));
               }
 
-              if (state.status == CounterStatus.counting) {
+              if (state.runtimeType == CountingCounterState) {
                 return Center(child: CircularProgressIndicator());
               }
 
-              if (state.status == CounterStatus.counted) {
+              if (state.runtimeType == CountedCounterState) {
                 return Text(
-                  state.counter.value.toString(),
+                  state.context.value.toString(),
                   style: Theme.of(context).textTheme.headline1,
                 );
               }

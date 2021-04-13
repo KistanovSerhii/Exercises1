@@ -4,12 +4,12 @@ import 'package:flutter_application_3/internal/dependences_init_tools/state_modu
 import 'package:flutter_application_3/domain/bloc/counter/counter_state.dart';
 import 'package:flutter_application_3/domain/bloc/counter/counter_event.dart';
 
-class CounterBloc extends Bloc<CounterEvent, CounterState> {
+class CounterBloc extends Bloc<CounterEvent, CounterStates> {
   CounterBloc()
       // ВАЖНО задать первоначальное состояние
       : super(StateModule.counterState());
   @override
-  Stream<CounterState> mapEventToState(CounterEvent event) async* {
+  Stream<CounterStates> mapEventToState(CounterEvent event) async* {
     switch (event.runtimeType) {
       case EventIncrement:
         yield* state.increment();
@@ -18,7 +18,7 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
         yield* state.decrement();
         break;
       case EventRandomNumWithDelay:
-        yield* state.getRandomFromCloudy();
+        yield* state.getRandomNumWithDelay();
         break;
       case EventRandomFromHttpRequest:
         yield* state.getRandomFromHttpRequest(1 /*event.range*/);

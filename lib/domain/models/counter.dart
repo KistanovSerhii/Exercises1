@@ -2,7 +2,8 @@ import 'dart:math';
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_3/domain/bloc/counter/counter_state.dart';
-import 'package:flutter_application_3/domain/repositories_contract/counter_repository.dart';
+import 'package:flutter_application_3/domain/contracts/contexts.dart/counter_context.dart';
+import 'package:flutter_application_3/domain/contracts/repositories/counter_repository.dart';
 import 'package:flutter_application_3/internal/dependences_init_tools/repository_module.dart';
 
 class CounterModule {
@@ -10,37 +11,47 @@ class CounterModule {
       RepositoryModule.counterRepository();
 }
 
-class Counter extends CounterModule {
+class Counter extends CounterModule with CounterInterface {
   int value;
   Counter({@required this.value});
 
-  CounterState counting() {
-    return CounterState(status: CounterStatus.counting, counter: this);
+  CounterStates counting() {
+    return CountingCounterState(this);
   }
 
-  CounterState increment() {
+  @override
+  CounterStates reset() {
+    this.value = 0;
+    return CountedCounterState(this);
+  }
+
+  @override
+  CounterStates increment() {
     this.value++;
-    return CounterState(status: CounterStatus.counted, counter: this);
+    return CountedCounterState(this);
   }
 
-  CounterState decrement() {
+  @override
+  CounterStates decrement() {
     this.value--;
-    return CounterState(status: CounterStatus.counted, counter: this);
+    return CountedCounterState(this);
   }
 
-  Future<CounterState> getRandomFromHttpRequest(int range) async {
+  @override
+  Future<CounterStates> getRandomFromHttpRequest(range) async {
     try {
       Counter respond =
           await CounterModule.repository.getRandomCounter(range: range);
-      return CounterState(status: CounterStatus.counted, counter: respond);
+      this.value = respond.value;
+      return CountedCounterState(this);
     } catch (e) {
-      return CounterState(status: CounterStatus.error, counter: this);
+      return ErrorCounterState("Error", this);
     }
   }
 
-  Future<CounterState> getRandomNumWithDelay() async {
+  Future<CounterStates> getRandomNumWithDelay() async {
     this.value = await RandomNumWithDelay.getRandomNumWithDelay();
-    return CounterState(status: CounterStatus.counted, counter: this);
+    return CountedCounterState(this);
   }
 }
 

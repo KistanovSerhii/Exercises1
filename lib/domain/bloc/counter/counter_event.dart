@@ -8,7 +8,6 @@ class EventDecrement extends CounterEvent {}
 
 class EventRandomFromHttpRequest extends CounterEvent {
   final int range;
-
   EventRandomFromHttpRequest({@required this.range});
 }
 

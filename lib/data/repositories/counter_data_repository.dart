@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_3/domain/repositories_contract/counter_repository.dart';
+import 'package:flutter_application_3/domain/contracts/repositories/counter_repository.dart';
 import 'package:flutter_application_3/data/api/api_util.dart';
 import 'package:flutter_application_3/domain/models/counter.dart';
 
